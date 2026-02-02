@@ -1,34 +1,38 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import PersonalInfo from './personalInfo'
+import Preview from './preview'
+import "./style.css"
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [pinfo,setPinfo]=useState({
+    name:"Vedansh Singhal",
+    phone:"7011994120",
+    email:"vedansh.singhal.ug23@nsut.ac.in",
+  })
+  const [link,setLink]=useState([{
+    id:1,link:"leetcode"
+  }])
+  const [education,setEducation]=useState([{
+    id:1, school:"NSUT", degree:"BTech",course:"ICE", grade:"8.15" ,time:"2023-2027"
+  }
+  ])
+  const [experience,setExperience]=useState([{
+    id:1, time:"2026-2027", organisation:"Google" , role:"SDE intern" , description:"WEUP"
+  }])
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+  const [skills,setSkills]=useState([{
+    id:1,skill:"Django"
+  }])
+  return(
+    <div className="container">
+      <div className="left">
+        <PersonalInfo data={pinfo} setData={setPinfo} link={link} setLink={setLink} edu={education} setEdu={setEducation} exp={experience} setExp={setExperience} skill={skills} setSkill={setSkills}/>
+        
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div className="right">
+        <Preview data={pinfo} link={link} edu={education} exp={experience} skill={skills}/>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
 

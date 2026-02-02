@@ -1,0 +1,19 @@
+.ResumePage {
+    width: 210mm;         /* Exact A4 Width */
+    min-height: 297mm;    /* Starts at A4 height, grows if you type more */
+    
+    padding: 20mm;        /* Standard 2cm print margins */
+    background: white;
+    
+    /* This ensures padding doesn't make the paper wider than 210mm */
+    box-sizing: border-box; 
+    
+    /* Visuals to make it look like paper on a desk */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+    margin-bottom: 20px;
+
+
+    transform: scale(0.78);
+    /* 2. Pin it to the top so it doesn't float away */
+    transform-origin: top center;
+}

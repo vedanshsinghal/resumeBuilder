@@ -1,0 +1,26 @@
+.Info{
+  display: flex;
+  flex-direction: column;
+  color:#b9c5c0;
+  gap: 10px;
+}
+.Info input {
+  margin-bottom: 10px;
+  background-color: #18181b;
+  border: solid 2px #3f3f46;
+  color:#e5e7eb;
+}
+input:focus{
+  border: solid 4px #91a99f;
+}
+
+button{
+  background-color: #b9c5c0;
+}
+
+/* This targets the placeholder text specifically */
+.Info input::placeholder, 
+.Info textarea::placeholder {
+  color: #52525b;  
+  opacity: 1;      /* Firefox lowers opacity by default, this fixes it */
+}

@@ -33,10 +33,11 @@ function PersonalInfo({data,setData,link,setLink,edu,setEdu,exp,setExp,skill,set
                 <h1>Links</h1>
                 {link.map((item)=>(
                     <div key={item.id}>
-                        <input type="text" placeholder="Links" name="link" value={item.link} onChange={(e)=>handleListChange(e,item.id,link,setLink)}/>
+                        <input type="text" placeholder="Link" name="link" value={item.link} onChange={(e)=>handleListChange(e,item.id,link,setLink)}/>
+                        <input type="text" placeholder="URL" name="url" value={item.url} onChange={(e)=>handleListChange(e,item.id,link,setLink)}/>
                     </div>
                 ))}
-                <button className="addBtn" onClick={() => addMore(link, setLink, {link: "" })}>+ Add Link</button>
+                <button className="addBtn" onClick={() => addMore(link, setLink, {link: "" ,url:""})}>+ Add Link</button>
             </div>
             <div>
                 <h1>Education Info</h1>

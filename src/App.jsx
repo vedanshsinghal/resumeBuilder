@@ -10,7 +10,7 @@ function App() {
     email:"vedansh.singhal.ug23@nsut.ac.in",
   })
   const [link,setLink]=useState([{
-    id:1,link:"leetcode"
+    id:1,link:"leetcode",url:"leetcode.com"
   }])
   const [education,setEducation]=useState([{
     id:1, school:"NSUT", degree:"BTech",course:"ICE", grade:"8.15" ,time:"2023-2027"

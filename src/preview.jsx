@@ -1,42 +1,54 @@
 import "./preview.css"
+import nsutLogo from "./assets/image.png"
+
 function Preview({data,link,edu,exp,skill}){
     return(
     <>
         <h1>Resume Preview</h1>
         <div className="ResumePage">
-            <div className="Pinfo">
-                <div>{data.name}</div>
-                <div>{data.phone}</div>
-                <div>{data.email}</div>
-            </div>
-            <div className="links">
-                {link.map((item)=>(
-                    <div key={item.id}>
-                        <div>{item.link}</div>
-                    </div>))}
+            <div className="header">
+                <img src={nsutLogo} alt="nsut logo" className="nsutLogo"/>
+                <div className="Pinfo">
+                    <div className="name">{data.name}</div>
+                    <div>{data.phone} | {data.email}</div>
+                    {link.map((item, index) =>(
+                    <span key={item.id}>
+                        <a href={item.url.startsWith("http")? item.url:`https://${item.url}`} target="_blank" rel="noreferrer">
+                            {item.link}
+                        </a>
+                        {/*(Only add if not the last item), rel is used for security idek*/}
+                        {index < link.length - 1 && <span> | </span>}
+                    </span>))}
+                </div>
             </div>
             <div className="education">
-                {edu.map((item)=>(
-                    <div key={item.id}>
-                        <div>{item.school}</div>
-                        <div>{item.degree}</div>
-                        <div>{item.course}</div>
-                        <div>{item.grade}</div>
-                        <div>{item.time}</div>
-                    </div>
-                ))}
+                <div className="section-heading">EDUCATION</div>
+                <table className="eduTable">
+                    <tbody>
+                    {edu.map((item)=>(
+                    <tr key={item.id}>
+                        <td>{item.degree}</td>
+                        <td>{item.time}</td>
+                        <td>{item.school}</td>
+                        <td>{item.grade}</td>
+                    </tr>))}
+                    </tbody>
+                </table>
             </div>
             <div className="experience">
+                <div className="section-heading">INTERNSHIPS</div>
                 {exp.map((item)=>(
                     <div key={item.id}>
-                        <div>{item.organisation}</div>
-                        <div>{item.role}</div>
+                        <div className="expHead subHeading">
+                            <div>{item.role} , {item.organisation}</div>
+                            <div className="expTime">{item.time}</div>
+                        </div>
                         <div>{item.description}</div>
-                        <div>{item.time}</div>
                     </div>
                 ))}
             </div>
-            <div className="skills">
+            <div className="SKILLS">
+                <div className="section-heading">Skills</div>
                 {skill.map((item)=>(
                     <div key={item.id}>
                         <div>{item.skill}</div>

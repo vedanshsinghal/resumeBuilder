@@ -5,32 +5,45 @@ import "./style.css"
 
 function App() {
   const [pinfo,setPinfo]=useState({
-    name:"Vedansh Singhal",
-    phone:"7011994120",
-    email:"vedansh.singhal.ug23@nsut.ac.in",
+    name:"",
+    phone:"",
+    email:"",
   })
   const [link,setLink]=useState([{
-    id:1,link:"leetcode",url:"leetcode.com"
+    id:1,link:"",url:""
   }])
   const [education,setEducation]=useState([{
-    id:1, school:"NSUT", degree:"BTech",course:"ICE", grade:"8.15" ,time:"2023-2027"
+    id:1, school:"", degree:"",course:"", grade:"" ,time:""
   }
   ])
   const [experience,setExperience]=useState([{
-    id:1, time:"2026-2027", organisation:"Google" , role:"SDE intern" , description:"WEUP"
+    id:1, time:"", organisation:"" , role:" " , description:""
+  }])
+
+  const [project, setProject]=useState([{
+    id:1, time:" " ,title:"", description:""
   }])
 
   const [skills,setSkills]=useState([{
-    id:1,skill:"Django"
+    id:1,skill:""
+  }])
+  const [achievement,setAchievement]=useState([{
+    id:1,achievement:""
+  }])
+  const [other,setOther]=useState([{
+    id:1,skill:""
+  }])
+  const [por,setPor]=useState([{
+    id:1,por:"", description:""
   }])
   return(
     <div className="container">
       <div className="left">
-        <PersonalInfo data={pinfo} setData={setPinfo} link={link} setLink={setLink} edu={education} setEdu={setEducation} exp={experience} setExp={setExperience} skill={skills} setSkill={setSkills}/>
+        <PersonalInfo por={por} setPor={setPor} other={other} setOther={setOther} data={pinfo} setData={setPinfo} link={link} setLink={setLink} edu={education} setEdu={setEducation} exp={experience} setExp={setExperience} project={project} setProject={setProject} skill={skills} setSkill={setSkills} achievement={achievement} setAchievement={setAchievement}/>
         
       </div>
       <div className="right">
-        <Preview data={pinfo} link={link} edu={education} exp={experience} skill={skills}/>
+        <Preview por={por} other={other} data={pinfo} link={link} edu={education} exp={experience} project={project} skill={skills} achievement={achievement}/>
       </div>
     </div>
   )

@@ -1,7 +1,7 @@
 import "./preview.css"
 import nsutLogo from "./assets/image.png"
 
-function Preview({data,link,edu,exp,skill}){
+function Preview({data,link,edu,exp,skill,project,achievement,other,por}){
     return(
     <>
         <h1>Resume Preview</h1>
@@ -40,21 +40,91 @@ function Preview({data,link,edu,exp,skill}){
                 {exp.map((item)=>(
                     <div key={item.id}>
                         <div className="expHead subHeading">
-                            <div>{item.role} , {item.organisation}</div>
-                            <div className="expTime">{item.time}</div>
+                            <div>{item.role}, {item.organisation}</div>
+                            <div>{item.time}</div>
                         </div>
-                        <div>{item.description}</div>
+                        <ul>
+                            {item.description
+                            .split('\n') // 1. Split string into array wherever "Enter" was pressed
+                            .filter(line => line.trim() !== "") // 2. Remove empty lines if they accidentally hit Enter twice
+                            .map((line, index) => (
+                                <li key={index}>
+                                    {line} 
+                                </li>
+                            ))
+                            }
+                        </ul>
+                    </div>
+                ))}
+            </div>
+            <div className="project">
+                <div className="section-heading">PROJECTS</div>
+                {project.map((item)=>(
+                    <div key={item.id}>
+                        <div className="projectHead subHeading">
+                            <div>{item.title}</div>
+                            <div>{item.time}</div>
+                        </div>
+                        <ul>
+                            {item.description
+                            .split('\n') // 1. Split string into array wherever "Enter" was pressed
+                            .filter(line => line.trim() !== "") // 2. Remove empty lines if they accidentally hit Enter twice
+                            .map((line, index) => (
+                                <li key={index}>
+                                    {line} 
+                                </li>
+                            ))
+                            }
+                        </ul>
+                    </div>
+                ))}
+            </div>
+            <div className="achievement">
+                <div className="section-heading">ACADEMIC ACHIEVEMENTS AND AWARDS</div>
+                <ul>{achievement.map((item)=>(
+                    <li key={item.id}>
+                        {item.achievement}
+                    </li>
+                ))}</ul>
+            </div>
+            <div className="por">
+                <div className="section-heading">POSITIONS OF RESPONSIBILITY</div>
+                {por.map((item)=>(
+                    <div key={item.id}>
+                        <div className=" subHeading">
+                            <div>{item.por}</div>
+                        </div>
+                        <ul>
+                            {item.description
+                            .split('\n') // 1. Split string into array wherever "Enter" was pressed
+                            .filter(line => line.trim() !== "") // 2. Remove empty lines if they accidentally hit Enter twice
+                            .map((line, index) => (
+                                <li key={index}>
+                                    {line} 
+                                </li>
+                            ))
+                            }
+                        </ul>
                     </div>
                 ))}
             </div>
             <div className="SKILLS">
-                <div className="section-heading">Skills</div>
-                {skill.map((item)=>(
-                    <div key={item.id}>
-                        <div>{item.skill}</div>
-                    </div>
-                ))}
+                <div className="section-heading">TECHNICAL SKILLS</div>
+                <ul>{skill.map((item)=>(
+                    <li key={item.id}>
+                        {item.skill}
+                    </li>
+                ))}</ul>
             </div>
+            <div className="other">
+                <div className="section-heading">OTHER SKILLS AND EXTRA CURRICULAR ACTIVITIES</div>
+                <ul>{other.map((item)=>(
+                    <li key={item.id}>
+                        {item.skill}
+                    </li>
+                ))}</ul>
+            </div>
+        
         </div>
     </>)
 }

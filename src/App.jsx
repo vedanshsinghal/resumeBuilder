@@ -20,11 +20,11 @@ function App() {
   }
   ])
   const [experience,setExperience]=useState([{
-    id:1, time:"", organisation:"" , role:" " , description:""
+    id:1, time:"", organisation:"" , role:"" , description:""
   }])
 
   const [project, setProject]=useState([{
-    id:1, time:" " ,title:"", description:""
+    id:1, time:"" ,title:"", description:""
   }])
 
   const [skills,setSkills]=useState([{

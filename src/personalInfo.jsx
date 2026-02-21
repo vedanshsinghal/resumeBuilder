@@ -29,7 +29,7 @@ function PersonalInfo({visibility,setVisibility,por,setPor,data,setData,link,set
     
     return(
         <div className="Info">
-            <div>
+            <div className="section">
                 <div className="sectionHead">
                 <h1>Personal Info</h1></div>
                 <div className="inputAll">
@@ -38,7 +38,7 @@ function PersonalInfo({visibility,setVisibility,por,setPor,data,setData,link,set
                     <input type="text" placeholder="Email" name="email" value={data.email} onChange={handleInfoChange} />
                 </div>
             </div>
-            <div>
+            <div className="section">
                 <div className="sectionHead">
                 <h1>Links</h1></div>
                 {link.map((item)=>(
@@ -50,7 +50,7 @@ function PersonalInfo({visibility,setVisibility,por,setPor,data,setData,link,set
                 ))}
                 <button className="addBtn" onClick={() => addMore(link, setLink, {link: "" ,url:""})}>+ Add Link</button>
             </div>
-            <div>
+            <div className="section">
                 <div className="sectionHead">
                 <h1>Education Info</h1></div>
                 {edu.map((item)=>(
@@ -63,7 +63,7 @@ function PersonalInfo({visibility,setVisibility,por,setPor,data,setData,link,set
                     </div>))}
                 <button className="addBtn" onClick={() => addMore(edu, setEdu, { school: "", degree: "",course:"", grade: "", time: "" })}>+ Add Education</button>
             </div>  
-            <div> 
+            <div className="section"> 
                 <div className="sectionHead">
                 <h1>Internships</h1>
                 <input type="checkbox" checked={visibility.experience} onChange={() => setVisibility({...visibility,  experience: !visibility.experience })}></input>
@@ -78,7 +78,7 @@ function PersonalInfo({visibility,setVisibility,por,setPor,data,setData,link,set
                     </div>))}
                 <button className="addBtn" onClick={() => addMore(exp, setExp, { organisation: "", role: "",description:"",time: "" })}>+ Add Experience</button>
             </div>
-            <div>
+            <div className="section">
                 <div className="sectionHead">
                 <h1>Projects</h1>
                 <input type="checkbox" checked={visibility.projects} onChange={() => setVisibility({...visibility,  projects: !visibility.projects })}></input>
@@ -94,7 +94,7 @@ function PersonalInfo({visibility,setVisibility,por,setPor,data,setData,link,set
                     </div>))}
                 <button className="addBtn" onClick={() => addMore(project, setProject, { title: "", description:"",time: "" })}>+ Add Project</button>
             </div>
-            <div>
+            <div className="section">
                 <div className="sectionHead">
                     <h1>Achievements</h1>
                     <input type="checkbox" checked={visibility.achievement} onChange={() => setVisibility({...visibility,  achievement: !visibility.achievement })}></input>
@@ -106,7 +106,7 @@ function PersonalInfo({visibility,setVisibility,por,setPor,data,setData,link,set
                     </div>))}
                 <button className="addBtn" onClick={() => addMore(achievement, setAchievement, { achievement: "" })}>+ Add Achievement</button>
             </div>
-            <div>
+            <div className="section">
                 <div className="sectionHead">
                     <h1>PORs</h1>
                     <input type="checkbox" checked={visibility.por} onChange={() => setVisibility({...visibility,  por: !visibility.por })}></input>
@@ -122,7 +122,7 @@ function PersonalInfo({visibility,setVisibility,por,setPor,data,setData,link,set
                     </div>))}
                 <button className="addBtn" onClick={() => addMore(por, setPor, { por: "", description:"" })}>+ Add POR</button>
             </div>
-            <div>
+            <div className="section">
                 <div className="sectionHead">
                     <h1>Technical Skills</h1></div>
                 {skill.map((item)=>(
@@ -132,7 +132,7 @@ function PersonalInfo({visibility,setVisibility,por,setPor,data,setData,link,set
                     </div>))}
                 <button className="addBtn" onClick={() => addMore(skill, setSkill, { skill: "" })}>+ Add Skill</button>
             </div>
-            <div>
+            <div className="section">
                 <div className="sectionHead">
                     <h1>Other Skills</h1></div>
                 {other.map((item)=>(

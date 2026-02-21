@@ -3,9 +3,10 @@
   flex-direction: column;
   color:#b9c5c0;
   gap: 10px;
+  
 }
 .Info input, textarea {
-  margin-bottom: 10px;
+  margin: 10px 0px;
   background-color: #18181b;
   border: solid 2px #3f3f46;
   color:#e5e7eb;
@@ -15,7 +16,9 @@ input:focus, textarea:focus{
 }
 
 button{
+  cursor: pointer;
   background-color: #b9c5c0;
+  margin-top: 2px
 }
 
 /* This targets the placeholder text specifically */
@@ -25,3 +28,42 @@ button{
   opacity: 1;      /* Firefox lowers opacity by default, this fixes it */
 }
 
+.delete-btn {
+    background-color: #000000; 
+    color: white;
+    border: none;
+    border-radius: 50%; 
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background 0.2s;
+    margin: 0px 30px;
+}
+
+.delete-btn:hover {
+    background-color: #cc0000; 
+}
+
+.inputAll{
+  border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+.sectionHead{
+  display: flex;
+  min-width: 100%;
+  padding-bottom:2px; 
+  border-bottom: 1px solid rgb(0, 0, 0);
+  gap: 15px;
+
+}
+
+input[type="checkbox"] {
+  accent-color: #000000;
+  transform: scale(1.8);
+  cursor: pointer;
+}
+
+.longer_the_input{
+  width: 500px;
+}

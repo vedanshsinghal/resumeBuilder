@@ -1,10 +1,9 @@
 import "./preview.css"
 import nsutLogo from "./assets/image.png"
 
-function Preview({data,link,edu,exp,skill,project,achievement,other,por}){
+function Preview({data,link,edu,exp,skill,project,achievement,other,por,visibility}){
     return(
     <>
-        <h1>Resume Preview</h1>
         <div className="ResumePage">
             <div className="header">
                 <img src={nsutLogo} alt="nsut logo" className="nsutLogo"/>
@@ -35,7 +34,7 @@ function Preview({data,link,edu,exp,skill,project,achievement,other,por}){
                     </tbody>
                 </table>
             </div>
-            <div className="experience">
+            <div className={visibility.experience? "experience":"experience hidden"}>
                 <div className="section-heading">INTERNSHIPS</div>
                 {exp.map((item)=>(
                     <div key={item.id}>
@@ -57,7 +56,7 @@ function Preview({data,link,edu,exp,skill,project,achievement,other,por}){
                     </div>
                 ))}
             </div>
-            <div className="project">
+            <div className={visibility.projects?"project":"project hidden"}>
                 <div className="section-heading">PROJECTS</div>
                 {project.map((item)=>(
                     <div key={item.id}>
@@ -79,7 +78,7 @@ function Preview({data,link,edu,exp,skill,project,achievement,other,por}){
                     </div>
                 ))}
             </div>
-            <div className="achievement">
+            <div className={visibility.achievement?"achievement":"achievement hidden"}>
                 <div className="section-heading">ACADEMIC ACHIEVEMENTS AND AWARDS</div>
                 <ul>{achievement.map((item)=>(
                     <li key={item.id}>
@@ -87,7 +86,7 @@ function Preview({data,link,edu,exp,skill,project,achievement,other,por}){
                     </li>
                 ))}</ul>
             </div>
-            <div className="por">
+            <div className={visibility.por?"por":"por hidden"}>
                 <div className="section-heading">POSITIONS OF RESPONSIBILITY</div>
                 {por.map((item)=>(
                     <div key={item.id}>

@@ -4,6 +4,9 @@ import Preview from './preview'
 import "./style.css"
 
 function App() {
+  const handlePrint=()=>{
+    window.print()
+  }
   const [pinfo,setPinfo]=useState({
     name:"",
     phone:"",
@@ -13,7 +16,7 @@ function App() {
     id:1,link:"",url:""
   }])
   const [education,setEducation]=useState([{
-    id:1, school:"", degree:"",course:"", grade:"" ,time:""
+    id:1, school:"", degree:"", grade:"" ,time:""
   }
   ])
   const [experience,setExperience]=useState([{
@@ -36,14 +39,22 @@ function App() {
   const [por,setPor]=useState([{
     id:1,por:"", description:""
   }])
+  const [visibility,setVisibility]=useState({
+    projects:true,
+    experience:true,
+    achievement:true,
+    por:true
+  })
   return(
     <div className="container">
       <div className="left">
-        <PersonalInfo por={por} setPor={setPor} other={other} setOther={setOther} data={pinfo} setData={setPinfo} link={link} setLink={setLink} edu={education} setEdu={setEducation} exp={experience} setExp={setExperience} project={project} setProject={setProject} skill={skills} setSkill={setSkills} achievement={achievement} setAchievement={setAchievement}/>
+        <PersonalInfo visibility={visibility} setVisibility={setVisibility} por={por} setPor={setPor} other={other} setOther={setOther} data={pinfo} setData={setPinfo} link={link} setLink={setLink} edu={education} setEdu={setEducation} exp={experience} setExp={setExperience} project={project} setProject={setProject} skill={skills} setSkill={setSkills} achievement={achievement} setAchievement={setAchievement}/>
         
       </div>
       <div className="right">
-        <Preview por={por} other={other} data={pinfo} link={link} edu={education} exp={experience} project={project} skill={skills} achievement={achievement}/>
+        <h1 className='previewHeading'>Resume Preview</h1>
+        <button className='printBtn' onClick={handlePrint}>Print</button>
+        <Preview visibility={visibility} por={por} other={other} data={pinfo} link={link} edu={education} exp={experience} project={project} skill={skills} achievement={achievement}/>
       </div>
     </div>
   )

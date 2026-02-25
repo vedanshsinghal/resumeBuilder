@@ -15,9 +15,9 @@
     font-size: 14px; /* This is approx 10.5pt print size */
     line-height: 1.3; /* Tighter line height for density */
 
-    transform: scale(0.54); /* to fit on screen */
+    /*transform: scale(0.54); /* to fit on screen */
     /* Pin it to the top so it doesn't float away */
-    transform-origin: top center;
+    /*transform-origin: top center;*/
 }
 
 .name{

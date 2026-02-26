@@ -86,7 +86,7 @@ const scaleFactor = Math.min(heightScale,widthScale)
           <h1 className='previewHeading'>Resume Preview</h1>
           <button className='printBtn' onClick={handlePrint}>Print</button>
           {isMobile && <button className='editBtn' onClick={() => setactiveTab('edit')}>Edit Info</button>}
-          <div style={{ transform: `scale(${scaleFactor})`, transformOrigin: 'top center' }}>
+          <div className="printWrap" style={{ transform: `scale(${scaleFactor})`, transformOrigin: 'top center' }}>
           <Preview visibility={visibility} por={por} other={other} data={pinfo} link={link} edu={education} exp={experience} project={project} skill={skills} achievement={achievement}/>
           </div>
         </div>)}

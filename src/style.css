@@ -68,14 +68,19 @@ html{
   .ResumePage {
     width: 210mm;
     min-height: 297mm;
-
     position: absolute;
-    left: 50%; /* resume starts at 50% of width*/
-    top: 0;  
-    transform: translateX(-50%); /*resume shifts left by 50% of its own width*/
+    left: 0;
+    top: 0;
 
+    
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
+  }
+
+  .printWrap{
+    transform: none !important; 
+    margin: 0 !important;
+    width: 100% !important;
   }
 
   /*  Remove browser headers/footers (URL, Date, Page Number) */

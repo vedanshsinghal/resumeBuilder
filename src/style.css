@@ -60,6 +60,23 @@ html{
     width: 100% !important;
   }
 
+  /*  Kill the 100vh lock so the phone doesn't miscalculate the screen height */
+  html, body, .container, .right {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* The 1mm Shave. Forces the paper to be slightly smaller than A4 and chops off ghost pixels */
+  .ResumePage {
+    height: 296mm !important; 
+    max-height: 296mm !important;
+    overflow: hidden !important; 
+    box-shadow: none !important; /* Removes the grey blur */
+  }
+  
  .right {
     background: transparent !important;
   }

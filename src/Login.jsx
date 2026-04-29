@@ -30,8 +30,7 @@ const Login = () => {
         navigate('/'); // Teleport to builder
       } else {
         setError(data.message);
-        console.log(response.status);
-        console.log(data);
+        
       }
     } catch (err) {
       setError('Server error. Please try again.');
@@ -44,7 +43,7 @@ const Login = () => {
     <div className="auth-page">
       <div className="auth-card">
         <h2>Welcome Back</h2>
-        
+        {error && <p style={{ color: 'red', marginBottom: '10px' }}>{error}</p>}
         <form onSubmit={handleLogin} className="auth-form">
           <input 
             type="email" 

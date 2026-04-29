@@ -3,11 +3,13 @@ import PersonalInfo from './personalInfo'
 import Preview from './preview'
 import "./style.css"
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 function ResumeBuilder() {
   const handlePrint=()=>{
     window.print()
   }
+  const navigate=useNavigate()
 
   const handleLogout = () => {
     localStorage.removeItem('token');

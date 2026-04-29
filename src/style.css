@@ -169,8 +169,7 @@ html{
 
 .auth-error {
   margin-top: 10px;
-  font-size: 13px;
-  color: #ff6b6b;
+  font-size: 15px;
+  color: #be0606;
   text-align: center;
-  opacity: 0.85;
-}
+  }

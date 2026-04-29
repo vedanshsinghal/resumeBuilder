@@ -30,6 +30,8 @@ const Login = () => {
         navigate('/'); // Teleport to builder
       } else {
         setError(data.message);
+        console.log(response.status);
+        console.log(data);
       }
     } catch (err) {
       setError('Server error. Please try again.');

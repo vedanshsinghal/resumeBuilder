@@ -60,7 +60,7 @@ const Login = () => {
             value={password} 
             onChange={(e) => setPassword(e.target.value)} 
           />
-          <button type="submit" disabled={isLoading}>
+          <button type="submit" className="auth-button" disabled={isLoading}>
             {isLoading ? "Loading..." : 'Login'}
           </button>
         </form>

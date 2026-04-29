@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setIsLoading(true); // <--- Turn on loading spinner/text
     setError('');
 
     try {
@@ -30,6 +33,8 @@ const Login = () => {
       }
     } catch (err) {
       setError('Server error. Please try again.');
+    } finally{
+      setIsLoading(false)
     }
   };
 
@@ -55,7 +60,9 @@ const Login = () => {
             value={password} 
             onChange={(e) => setPassword(e.target.value)} 
           />
-          <button type="submit" className="auth-button">Log In</button>
+          <button type="submit" disabled={isLoading}>
+            {isLoading ? 'Waking up server (takes ~30s)...' : 'Login'}
+          </button>
         </form>
         
         <p className="auth-link-text">

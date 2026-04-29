@@ -12,7 +12,7 @@ function ResumeBuilder() {
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('userName');
-    window.location.href = '/login'; 
+    navigate('/login')
   };
 
   const handleSave = async () => {

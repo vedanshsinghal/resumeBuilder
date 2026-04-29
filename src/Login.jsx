@@ -43,7 +43,6 @@ const Login = () => {
     <div className="auth-page">
       <div className="auth-card">
         <h2>Welcome Back</h2>
-        {error && <p style={{ color: 'red', marginBottom: '10px' }}>{error}</p>}
         <form onSubmit={handleLogin} className="auth-form">
           <input 
             type="email" 
@@ -61,6 +60,7 @@ const Login = () => {
             value={password} 
             onChange={(e) => setPassword(e.target.value)} 
           />
+          {error && <div className="auth-error">{error}</div>}
           <button type="submit" className="auth-button" disabled={isLoading}>
             {isLoading ? "Loading..." : 'Login'}
           </button>

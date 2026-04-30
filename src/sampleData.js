@@ -1,5 +1,5 @@
 export const sampleResume={
-    pinfo:{name:"Vedansh",phone:"7011994120",email:"vedanshsinghal21@gmail.com"},
+    pinfo:{name:"Vedansh Singhal",phone:"7011994120",email:"vedanshsinghal21@gmail.com"},
     link:[
         {id:1,link:"Leetcode", url:""},
         {id:2,link:"Linkedin", url:"https://www.linkedin.com/in/vedansh-singhal-b01430367/"},
@@ -17,26 +17,23 @@ export const sampleResume={
     ],
     project:[
         {id:1,time:"2026" ,title:"Resume Builder ( MERN stack )", 
-        description:"Developed a resume building web app for our university which has the format provided by the university built into it so a student can just enter the values, preview the resume in real time and even print it."},
-        {id:1,time:"2025", title:"Tic-Tac-Toe – (HTML, CSS, JavaScript)", description:"Developed a Tic-Tac-Toe web app using HTML, CSS, JS with a minimax algorithm for computer play.\nPracticed end to end development – from input handling and AI logic to frontend integration."
+        description:`Developed a full-stack web application that automates university resume formatting, providing students with a simple "plug-and-play" experience to input their details.\nBuilt a live document editor using React (similar to MS Word) that allows users to instantly preview their layout and text changes in real time.\nImplemented user registration and login functionality to securely save document progress in a database, alongside a one-click PDF export feature for the finalized resume.`},
+        {id:1,time:"2025", title:"Tic-Tac-Toe – (HTML, CSS, JavaScript)", description:"Developed an interactive web game with a clean, responsive user interface using core web technologies.\nImplemented an unbeatable AI opponent by programming the Minimax algorithm to calculate optimal moves."
         }
     ],
     skills:[
-        {id:1,skill:"Python and python libraries and frameworks (like numpy, Django etc)"},
-        {id:2,skill:"Data Structures and Algorithms (DSA)"},
-        {id:3,skill:"HTML, CSS, JavaScript, NodeJS, REACT framework"},
-        {id:4,skill:"SQL DBMS"},
-        {id:5,skill:"MS office (word, excel etc)"},
-        {id:6,skill:"Specialist in codeforces ( 1400+ rated )"},
-        {id:7,skill:"Knight on leetcode ( 1700+ rating ) with over 600 problems solved"}
+        {id:1,skill:"Languages: Python, JavaScript, HTML, CSS, SQL"},
+        {id:2,skill:"Frameworks/Libraries: React, Node.js, Express, Vite, Django, NumPy."},
+        {id:3,skill:"Developer & Engineering Tools: Git, VS Code, MATLAB"}
     ],
     achievement:[
-        {id:1,achievement:"Awarded gold medal in school (DPS RKP) for academic excellence for 12 consecutive years."}
+        {id:1,achievement:"Specialist in codeforces ( 1400+ rated )"},
+        {id:2,achievement:"Knight on leetcode ( 1700+ rating ) with over 600 problems solved"},
+        {id:3,achievement:"Awarded gold medal in school (DPS RKP) for academic excellence for 12 consecutive years."}
     ],
     other:[
-        {id:1,skill:"Good at communication"},
-        {id:2,skill:"Video editing (davinci resolve, premiere pro etc) and graphic designing (canva, photoshop)"},
-        {id:3,skill:"Play guitar, singing and beatboxing. Play chess and football."},
+        {id:1,skill:"Video Production & Design: Produced and edited promotional reels for college events using DaVinci Resolve, and designed visual assets using Canva and Photoshop."},
+        {id:2,skill:"Play guitar, singing and beatboxing. Play chess and football."},
 
     ],
     por:[

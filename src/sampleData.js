@@ -1,6 +1,11 @@
 export const sampleResume={
     pinfo:{name:"Vedansh",phone:"7011994120",email:"vedanshsinghal21@gmail.com"},
-    link:[],
+    link:[
+        {id:1,link:"Leetcode", url:""},
+        {id:2,link:"Linkedin", url:"https://www.linkedin.com/in/vedansh-singhal-b01430367/"},
+        {id:3,link:"Github", url:""},
+        {id:4,link:"Codeforces", url:""},
+    ],
     education:[
         {id:1,school:"Netaji Subhas University of Technology", degree:"BTech", grade:"8.15" ,time:"2023-2027"},
         {id:2,school:"Delhi Public School, RK Puram", degree:"CBSE (class XII)", grade:"91%" ,time:"2023"},

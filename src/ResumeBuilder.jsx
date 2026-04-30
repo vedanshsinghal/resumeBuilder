@@ -4,6 +4,7 @@ import Preview from './preview'
 import "./style.css"
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { sampleResume } from './sampleData';
 
 function ResumeBuilder() {
   const handlePrint=()=>{
@@ -63,6 +64,18 @@ function ResumeBuilder() {
       toast.error('Could not connect to the server.'); // Changed
     }
   };
+
+  const handleLoadSample=()=>{
+    setPinfo(sampleResume.pinfo)
+    setEducation(sampleResume.education)
+    setAchievement(sampleResume.achievement)
+    setLink(sampleResume.link)
+    setProject(sampleResume.project)
+    setSkills(sampleResume.skills)
+    setOther(sampleResume.other)
+    setExperience(sampleResume.experience)
+    setPor(sampleResume.por)
+  }
   const [pinfo,setPinfo]=useState({
     name:"",
     phone:"",
@@ -137,17 +150,20 @@ function ResumeBuilder() {
 
         if (response.ok) {
           const data = await response.json();
-          
-          // Overwrite the blank React states with your saved MongoDB data!
+
+          const normalizeData = (array) => {
+             if (!array || !Array.isArray(array)) return [];
+             return array.map(item => ({ ...item, id: item._id || item.id }));
+          };          // Overwrite the blank React states with your saved MongoDB data!
           if (data.pinfo) setPinfo(data.pinfo);
-          if (data.link && data.link.length > 0) setLink(data.link);
-          if (data.education && data.education.length > 0) setEducation(data.education);
-          if (data.experience && data.experience.length > 0) setExperience(data.experience);
-          if (data.project && data.project.length > 0) setProject(data.project);
-          if (data.skills && data.skills.length > 0) setSkills(data.skills);
-          if (data.achievement && data.achievement.length > 0) setAchievement(data.achievement);
-          if (data.other && data.other.length > 0) setOther(data.other);
-          if (data.por && data.por.length > 0) setPor(data.por);
+          if (data.link) setLink(normalizeData(data.link));
+          if (data.education) setEducation(normalizeData(data.education));
+          if (data.experience) setExperience(normalizeData(data.experience));
+          if (data.project) setProject(normalizeData(data.project));
+          if (data.skills) setSkills(normalizeData(data.skills));
+          if (data.achievement) setAchievement(normalizeData(data.achievement));
+          if (data.other) setOther(normalizeData(data.other));
+          if (data.por) setPor(normalizeData(data.por));
         }
       } catch (error) {
         console.error('Error fetching resume data:', error);
@@ -177,10 +193,11 @@ const scaleFactor = Math.min(heightScale,widthScale)
         <div className="right">
           <h1 className='previewHeading'>Resume Preview</h1>
           {/* New Button Row! */}
-          <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginBottom: '10px' }}>
-            <button className='printBtn' style={{ backgroundColor: '#4CAF50' }} onClick={handleSave}>Save</button>
+          <div className='buttonBox'>
+            <button className='printBtn' onClick={handleSave}>Save</button>
             <button className='printBtn' onClick={handlePrint}>Print</button>
-            <button className='printBtn' style={{ backgroundColor: '#f44336' }} onClick={handleLogout}>Log Out</button>
+            <button className='printBtn' onClick={handleLoadSample}>Load Sample</button>
+            <button className='printBtn' onClick={handleLogout}>Log Out</button>
           </div>
           {isMobile && <button className='editBtn' onClick={() => setactiveTab('edit')}>Edit Info</button>}
           <div className="printWrap" style={{ transform: `scale(${scaleFactor})`, transformOrigin: 'top center' }}>

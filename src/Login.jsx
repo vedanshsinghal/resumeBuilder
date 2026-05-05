@@ -18,8 +18,8 @@ const Login = () => {
     try {
       const response = await fetch('https://resumebuilderbackend-nozm.onrender.com/api/auth/login', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        headers: { 'Content-Type': 'application/json' }, // headers will tell backend ki json aa raha hai
+        body: JSON.stringify({ email, password }), // stringify converts js object to json
       });
 
       const data = await response.json();
@@ -49,8 +49,8 @@ const Login = () => {
             className="auth-input"
             placeholder="Email Address" 
             required 
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
+            value={email} //email ki value ayegi yaha from the state
+            onChange={(e) => setEmail(e.target.value) /* yaha se change hogi value email ki*/} 
           />
           <input 
             type="password" 
@@ -61,8 +61,8 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)} 
           />
           {error && <div className="auth-error">{error}</div>}
-          <button type="submit" className="auth-button" disabled={isLoading}>
-            {isLoading ? "Loading..." : 'Login'}
+          <button type="submit" className="auth-button" disabled={isLoading}> {/** if loading - disable the login button  */}
+            {isLoading ? "Loading..." : 'Login'} {/** if loading print loading..., else login in button */}
           </button>
         </form>
         

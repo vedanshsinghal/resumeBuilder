@@ -9,7 +9,7 @@ const ProtectedRoute = ({ children }) => {
   // It checks localStorage right exactly when the route is visited
   const hasToken = !!localStorage.getItem('token');
   
-  if (!hasToken) {
+  if (!hasToken) { // no token wapis login karo
     return <Navigate to="/login" />;
   }
   
@@ -18,7 +18,7 @@ const ProtectedRoute = ({ children }) => {
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter> {/* allows all routes to read the url, jab url=route tab wo route trigger hojayega */}
     {/* 2. Add the Toaster here. It will show up on top of everything else */}
       <Toaster position="bottom-right" reverseOrder={false} />
       <Routes>
@@ -27,7 +27,7 @@ function App() {
           path="/" 
           element={
             <ProtectedRoute>
-              <ResumeBuilder />
+              <ResumeBuilder />  {/*children of protectedroute wala function*/}
             </ProtectedRoute>
           } 
         />

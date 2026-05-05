@@ -44,7 +44,7 @@ function ResumeBuilder() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}` // Show the bouncer your wristband
+          'Authorization': `Bearer ${token}` // Show the bouncer your wristband, send JWT
         },
         body: JSON.stringify(resumeData),
       });

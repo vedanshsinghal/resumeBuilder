@@ -16,9 +16,12 @@ export const sampleResume={
         description:"Researched in drone GPS antenna designing on CST software.\n Designed a drone GPS antenna (software and hardware) and made a mobile app for its navigation."}
     ],
     project:[
-        {id:1,time:"2026" ,title:"Resume Builder ( MERN stack )", 
-        description:`Developed a full-stack web application that automates university resume formatting, providing students with a simple "plug-and-play" experience to input their details.\nBuilt a live document editor using React (similar to MS Word) that allows users to instantly preview their layout and text changes in real time.\nImplemented user registration and login functionality to securely save document progress in a database, alongside a one-click PDF export feature for the finalized resume.`},
-        {id:1,time:"2025", title:"Tic-Tac-Toe – (HTML, CSS, JavaScript)", description:"Developed an interactive web game with a clean, responsive user interface using core web technologies.\nImplemented an unbeatable AI opponent by programming the Minimax algorithm to calculate optimal moves."
+        {id:1,time:"2026" ,title:"Interactive Resume Builder & ATS Analyzer | MERN + Gemini API", 
+        description:`Engineered a full-stack MERN application automating university resume formatting to provide students with a streamlined, interactive data-entry experience.\n
+        Architected a live React document editor utilizing dynamic state management, enabling real-time UI layout previews and seamless one-click PDF exports.\n
+        Implemented secure JWT user authentication and database integration to securely persist user sessions and document progress.\n
+        Integrated the Google Gemini API via a secure Express controller to build a real-time ATS analyzer, utilizing custom prompt engineering and JSON schemas to render structured, actionable feedback on the go.`},
+        {id:1,time:"2025", title:"Tic-Tac-Toe – (HTML, CSS, JavaScript)", description:"Developed a responsive web game featuring an unbeatable AI opponent powered by a custom implementation of the Minimax algorithm to calculate optimal decision trees."
         }
     ],
     skills:[

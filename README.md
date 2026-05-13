@@ -22,6 +22,12 @@ In short: useNavigate is how you give your JavaScript logic the power to physica
 
 
 
+fetch(url, {
+  method: 'POST',
+  body: JSON.stringify(myData) // 1st arg is URL, 2nd is everything else
+})
+
+axios.post(url, myData) // 1st arg is URL, 2nd is Data. Done.
 
 
 

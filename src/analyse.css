@@ -1,0 +1,107 @@
+/* Container for the whole Analysis section */
+.analyseContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  padding: 1.5rem;
+  margin-top: 1rem;
+}
+
+.analyseContainer h2 {
+  margin: 0;
+  font-size: 1.51rem;
+  color: #ffffff;
+}
+
+/* The Job Description Textarea */
+.jdInput {
+  width: 80%;
+  min-height: 150px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 14px;
+  resize: vertical;
+}
+
+.jdInput:focus {
+  outline: 2px solid #4CAF50;
+  border-color: transparent;
+}
+
+/* The Run Analysis Button */
+.analyseBtn {
+  background-color: #4CAF50;
+  min-width: 100px;
+  width: 15%;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.analyseBtn:hover:not(:disabled) {
+  background-color: #45a049;
+}
+
+.analyseBtn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* The Results Box */
+.resultBox {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: #060b18;
+  padding: 1rem;
+  border-radius: 6px;
+  border-left: 5px solid #007bff; /* Accent bar */
+  margin-top: 0.5rem;
+}
+
+/* The ATS Score Circle */
+.scoreCircle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  font-size: 1.8rem;
+  font-weight: bold;
+  flex-shrink: 0;
+  border: 4px solid #ddd; /* Default border */
+}
+
+/* Update the layout of the result box to allow the lists to take up the remaining space */
+.resultBox {
+  display: flex;
+  align-items: flex-start; /* Aligns the circle and the text to the top */
+  gap: 1.5rem;
+  background-color: #0e1720;
+  padding: 1.5rem;
+  border-radius: 6px;
+  border-left: 5px solid #007bff;
+  margin-top: 0.5rem;
+}
+
+.feedbackLists {
+  flex-grow: 1; /* Makes the lists take up the rest of the card */
+}
+
+.feedbackCategory ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: #ddd4d4;
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+.feedbackCategory li {
+  margin-bottom: 6px;
+}

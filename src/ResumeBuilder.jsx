@@ -2,9 +2,11 @@ import { useState,useEffect } from 'react'
 import PersonalInfo from './personalInfo'
 import Preview from './preview'
 import "./style.css"
+import "./analyse.css"
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { sampleResume } from './sampleData';
+import axios from "axios"
 
 function ResumeBuilder() {
   const handlePrint=()=>{
@@ -182,13 +184,81 @@ const heightScale = workableHeight / 1123;
   // 2. Calculate perfect scale based on available space (minus 40px for some breathing room)
 const scaleFactor = Math.min(heightScale,widthScale)
 
+const [jobDescription,setjobDescription]=useState("")
+const [analysisResult, setAnalysisResult] = useState(null);
+const [isAnalysing, setIsAnalysing] = useState(false)
+const handleAnalyse = async () => {
+  setIsAnalysing(true);
+  const token = localStorage.getItem('token');
+  try {
+    // send the current state of all your resume sections (pinfo, education, etc.)
+    const resumeData = {education, experience, project, skills, achievement, other, por };
+    
+    const response = await axios.post('https://resumebuilderbackend-nozm.onrender.com/api/analyse', {
+      resumeData, jobDescription},{headers:{'Authorization': `Bearer ${token}`}
+    });
+    
+    setAnalysisResult(response.data);
+  } catch (err) {
+    console.error("Analysis failed", err);
+  } finally {
+    setIsAnalysing(false);
+  }
+}
+
   return(
     <div className="container">
-      {(!isMobile||activeTab==="edit") &&(
+      {(activeTab==="edit") &&(
         <div className="left">
-          {isMobile && <div className='viewDiv'><button className='viewBtn' onClick={() => setactiveTab('preview')}>Preview</button></div>}
+          <div className='viewDiv'>
+          {isMobile && <button className='viewBtn' onClick={() => setactiveTab('preview')}>PREVIEW</button>}
+          <button className='viewBtn' onClick={()=>setactiveTab("analyse")}>ANALYSE</button>
+          </div>
           <PersonalInfo visibility={visibility} setVisibility={setVisibility} por={por} setPor={setPor} other={other} setOther={setOther} data={pinfo} setData={setPinfo} link={link} setLink={setLink} edu={education} setEdu={setEducation} exp={experience} setExp={setExperience} project={project} setProject={setProject} skill={skills} setSkill={setSkills} achievement={achievement} setAchievement={setAchievement}/>
         </div>)}
+
+
+      {activeTab==="analyse" &&(
+        <div className='left'>
+          <div className='viewDiv'>
+            {<button className='viewBtn' onClick={() => setactiveTab('edit')}>EDIT</button>}
+            {isMobile&&<button className='viewBtn' onClick={() => setactiveTab('preview')}>PREVIEW</button>}
+          </div>
+          <div className='analyseContainer'>
+            <h2>Target Job Description</h2>
+            <textarea className="jdInput" placeholder="Paste the job description here..." value={jobDescription} onChange={(e) => setjobDescription(e.target.value)}/>
+            <button className="analyseBtn" onClick={handleAnalyse} disabled={isAnalysing}>
+              {isAnalysing ? "Scanning..." : "RUN ANALYSIS"}
+            </button>
+            {analysisResult && (
+            <div className="resultBox" style={{ borderLeftColor: analysisResult.score >= 70 ? '#28a745' : '#dc3545' }}>
+              <div className="scoreSection">
+                <div className="scoreCircle" style={{borderColor: analysisResult.score >= 75 ? '#28a745' : analysisResult.score >= 50 ? '#ffc107' : '#dc3545', color: analysisResult.score >= 75 ? '#28a745' : analysisResult.score >= 50 ? '#856404' : '#dc3545'}}                >
+                  {analysisResult.score}%
+                </div>
+              </div>
+              <div className="feedbackLists">
+                <div className="feedbackCategory">
+                  <h4 style={{ color: '#28a745', margin: '0 0 8px 0' }}>✅ Top Strengths</h4>
+                  <ul>
+                    {analysisResult.strengths.map((item, index) => (
+                    <li key={index}>{item}</li>))}
+                  </ul>
+                </div>
+                <div className="feedbackCategory">
+                  <h4 style={{ color: '#dc3545', margin: '12px 0 8px 0' }}>⚠️ Areas to Improve</h4>
+                  <ul>
+                    {analysisResult.improvements.map((item, index) => (
+                    <li key={index}>{item}</li>))}
+                  </ul>
+                </div>
+              </div>
+              
+            </div>)}
+            </div>
+          </div>
+      )}
+
       {(!isMobile||activeTab==="preview") &&(
         <div className="right">
           <h1 className='previewHeading'>Resume Preview</h1>
@@ -199,7 +269,10 @@ const scaleFactor = Math.min(heightScale,widthScale)
             <button className='printBtn' onClick={handleLoadSample}>Load Sample</button>
             <button className='printBtn' onClick={handleLogout}>Log Out</button>
           </div>
-          {isMobile && <button className='editBtn' onClick={() => setactiveTab('edit')}>Edit Info</button>}
+          <div>
+            {isMobile && <button className='editBtn' onClick={() => setactiveTab('edit')}>EDIT</button>}
+            {isMobile && <button className='editBtn' onClick={() => setactiveTab('analyse')}>ANALYSE</button>}          
+          </div>
           <div className="printWrap" style={{ transform: `scale(${scaleFactor})`, transformOrigin: 'top center' }}>
           <Preview visibility={visibility} por={por} other={other} data={pinfo} link={link} edu={education} exp={experience} project={project} skill={skills} achievement={achievement}/>
           </div>

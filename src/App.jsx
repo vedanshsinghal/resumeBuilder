@@ -3,6 +3,7 @@ import { Toaster } from 'react-hot-toast';
 import Login from './Login';
 import Register from './Register';
 import ResumeBuilder from './ResumeBuilder';
+import { Analytics } from "@vercel/analytics/react"
 console.log("Backend",import.meta.env.VITE_API_BASE_URL)
 
 // 1. Create a tiny bouncer component

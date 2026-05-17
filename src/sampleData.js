@@ -25,9 +25,9 @@ export const sampleResume={
         }
     ],
     skills:[
-        {id:1,skill:"Languages: Python, JavaScript, HTML, CSS, SQL"},
-        {id:2,skill:"Frameworks/Libraries: React, Node.js, Express, Vite, Django, NumPy."},
-        {id:3,skill:"Developer & Engineering Tools: Git, VS Code, MATLAB"}
+        {id:1,skill:"Languages & Databases: Python, JavaScript, HTML/CSS, SQL, MongoDB"},
+        {id:2,skill:"Frameworks & Libraries: React, Node.js, Express, Vite, NumPy, Pandas"},
+        {id:3,skill:"Tools & Fundamentals: Git, GitHub, Vercel, Render, Linux/WSL, VS Code, MATLAB, DSA, OOPs, DBMS"}
     ],
     achievement:[
         {id:1,achievement:"Specialist in codeforces ( 1400+ rated )"},

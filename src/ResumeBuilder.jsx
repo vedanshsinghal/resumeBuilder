@@ -233,6 +233,7 @@ const handleAnalyse = async () => {
             {analysisResult && (
             <div className="resultBox" style={{ borderLeftColor: analysisResult.score >= 70 ? '#28a745' : '#dc3545' }}>
               <div className="scoreSection">
+                <div style={{color: "#f7f7f7", fontWeight:"bold"}}>ATS SCORE</div>
                 <div className="scoreCircle" style={{borderColor: analysisResult.score >= 75 ? '#28a745' : analysisResult.score >= 50 ? '#ffc107' : '#dc3545', color: analysisResult.score >= 75 ? '#28a745' : analysisResult.score >= 50 ? '#856404' : '#dc3545'}}                >
                   {analysisResult.score}%
                 </div>

@@ -68,39 +68,63 @@ html{
 }
 
 @media print {
-  .left,.printBtn,.editBtn,.previewHeading{
-    display: none;
+  /* 1. Hide the editor UI and buttons */
+  .left, .printBtn, .editBtn, .previewHeading {
+    display: none !important;
   }
 
-  .printWrap{
-    transform: none !important; 
+  /* 2. Reset the page background and margins */
+  html, body {
     margin: 0 !important;
-    width: 100% !important;
+    padding: 0 !important;
+    background: #fff !important;
   }
 
-  
- .right {
+  /* 3. Let the resume preview fill the paper naturally */
+  .right {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
     background: transparent !important;
   }
-  .ResumePage {
-    box-shadow: none !important;
+
+  /* 4. Remove any digital borders, shadows, or zoom effects */
+  .printWrap, .ResumePage {
+    width: 100% !important;
+    max-width: 100% !important;
     margin: 0 !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+  /* 5. Force A4 dimensions */
+  @page {
+    size: A4 portrait;
+    margin: 0; 
+  }
+  #root, .App, body {
+    display: block !important; 
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
-  /*  Remove browser headers/footers (URL, Date, Page Number) */
-  @page {
-    margin: 0 ; 
-    size: A4;
+  /* 2. Stop the first heading/text from pushing the whole page down */
+  .ResumePage {
+    margin-top: 0 !important;
+    padding-top: 1px !important; /* The 1px padding trick prevents margin collapse */
+  }
+
+  .ResumePage > *:first-child {
+    margin-top: 0 !important;
   }
 }
 
-@media (max-width: 1024px) {
-  .left,.right {
+@media screen and (max-width: 1024px) {
+  .left, .right {
     width: 100%;
   }
 }
-
-
 
 
 

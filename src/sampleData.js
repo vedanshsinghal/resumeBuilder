@@ -36,8 +36,6 @@ export const sampleResume={
     ],
     other:[
         {id:1,skill:"Video Production & Design: Produced and edited promotional reels for college events using DaVinci Resolve, and designed visual assets using Canva and Photoshop."},
-        {id:2,skill:"Play guitar, singing and beatboxing. Play chess and football."},
-
     ],
     por:[
         {id:1,por:"Logistics coordinator for Moksha’25 – The annual fest of NSUT", description:"Responsible for smooth functioning of fest and provide logistic support throughout the fest.\nManage logistic volunteers."},

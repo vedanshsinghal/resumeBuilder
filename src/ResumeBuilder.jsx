@@ -42,7 +42,7 @@ function ResumeBuilder() {
     };
     const loadingToast = toast.loading('Saving your resume...');
     try {
-      const response = await fetch('https://resumebuilderbackend-nozm.onrender.com/api/resumes', {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/resumes`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -143,7 +143,7 @@ function ResumeBuilder() {
       if (!token) return; // If not logged in, just show the blank form
 
       try {
-        const response = await fetch('https://resumebuilderbackend-nozm.onrender.com/api/resumes', {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/resumes`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`
@@ -194,7 +194,7 @@ const handleAnalyse = async () => {
     // send the current state of all your resume sections (pinfo, education, etc.)
     const resumeData = {education, experience, project, skills, achievement, other, por };
     
-    const response = await axios.post('https://resumebuilderbackend-nozm.onrender.com/api/analyse', {
+    const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/analyse`, {
       resumeData, jobDescription},{headers:{'Authorization': `Bearer ${token}`}
     });
     
@@ -205,6 +205,12 @@ const handleAnalyse = async () => {
     setIsAnalysing(false);
   }
 }
+const criteria = [
+                { key: "keyword_match", label: "Keyword Match" },
+                { key: "work_experience", label: "Work Experience" },
+                { key: "measurable_achievements", label: "Achievements" },
+                { key: "education_certifications", label: "Education" },
+            ]
 
   return(
     <div className="container">
@@ -233,9 +239,20 @@ const handleAnalyse = async () => {
             {analysisResult && (
             <div className="resultBox" style={{ borderLeftColor: analysisResult.score >= 70 ? '#28a745' : '#dc3545' }}>
               <div className="scoreSection">
+                <div className='ATS'>
                 <div style={{color: "#f7f7f7", fontWeight:"bold"}}>ATS SCORE</div>
                 <div className="scoreCircle" style={{borderColor: analysisResult.score >= 75 ? '#28a745' : analysisResult.score >= 50 ? '#ffc107' : '#dc3545', color: analysisResult.score >= 75 ? '#28a745' : analysisResult.score >= 50 ? '#856404' : '#dc3545'}}                >
                   {analysisResult.score}%
+                </div>
+                </div>
+                <div className='rubricScores'>
+                  <div style={{color:"#28A745"}}>{analysisResult.rubric.reasoning}</div>
+                  {criteria.map(({ key, label }) => (
+                    <div key={key}>
+                      <span>{label} : </span>
+                      <span>{analysisResult.rubric_scores[key]}/{analysisResult.rubric.weights[key]}</span>
+                    </div>
+                ))}
                 </div>
               </div>
               <div className="feedbackLists">

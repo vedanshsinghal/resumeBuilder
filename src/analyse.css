@@ -55,6 +55,7 @@
 /* The Results Box */
 .resultBox {
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 1rem;
   background-color: #060b18;
@@ -65,10 +66,17 @@
 }
 
 .scoreSection{
+  width: 100%;
+  display: flex;
+  gap: 100px;
+  justify-content: center;
+  align-items: center;
+}
+.ATS{
   display: flex;
   flex-direction: column;
-  gap: 10px;
   align-items: center;
+  gap: 10px;
 }
 /* The ATS Score Circle */
 .scoreCircle {
@@ -109,4 +117,12 @@
 
 .feedbackCategory li {
   margin-bottom: 6px;
+}
+
+.rubricScores{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  color: #f0f0f0;
+  font-size: 1rem;
 }

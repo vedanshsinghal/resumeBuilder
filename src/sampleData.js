@@ -17,11 +17,13 @@ export const sampleResume={
     ],
     project:[
         {id:1,time:"2026" ,title:"Interactive Resume Builder & ATS Analyzer | MERN + Gemini API", 
+        link:"https://resumebuilder-opal-pi.vercel.app/",
         description:`Engineered a full-stack MERN application automating university resume formatting to provide students with a streamlined, interactive data-entry experience.\n
         Architected a live React document editor utilizing dynamic state management, enabling real-time UI layout previews and seamless one-click PDF exports.\n
         Implemented secure JWT user authentication and database integration to securely persist user sessions and document progress.\n
         Integrated the Google Gemini API via a secure Express controller to build a real-time ATS analyzer, utilizing custom prompt engineering and JSON schemas to render structured, actionable feedback on the go.`},
-        {id:1,time:"2025", title:"Tic-Tac-Toe – (HTML, CSS, JavaScript)", description:"Developed a responsive web game featuring an unbeatable AI opponent powered by a custom implementation of the Minimax algorithm to calculate optimal decision trees."
+        {id:2,time:"2025", title:"Tic-Tac-Toe – (HTML, CSS, JavaScript)", link:"",
+        description:"Developed a responsive web game featuring an unbeatable AI opponent powered by a custom implementation of the Minimax algorithm to calculate optimal decision trees."
         }
     ],
     skills:[
@@ -41,4 +43,9 @@ export const sampleResume={
         {id:1,por:"Logistics coordinator for Moksha’25 – The annual fest of NSUT", description:"Responsible for smooth functioning of fest and provide logistic support throughout the fest.\nManage logistic volunteers."},
         {id:2,por:"Execomm member in societies like:", description:"IEEE- The technical society of NSUT\nEnactus – The social entrepreneurship society of NSUT\nVenatus – The gaming society of NSUT"}
     ],
+    ghost:[{
+        id: 1,
+        heading:"",
+        content:""
+    }],
 }

@@ -1,21 +1,24 @@
 * {
   margin: 0;
 }
-html{
+
+html {
   font-size: 14px;
 }
-.container{
-    display: flex;
-    height: 100vh;
-    overflow: hidden;    /* PREVENT the whole page from scrolling */
+
+.container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  /* PREVENT the whole page from scrolling */
 }
 
-.left{
-    width: 60%;
-    padding: 1.25rem;
-    border-right: 2px solid #ddd;
-    background-color:#1c1f23;
-    overflow: auto;
+.left {
+  width: 60%;
+  padding: 1.25rem;
+  border-right: 2px solid #ddd;
+  background-color: #1c1f23;
+  overflow: auto;
 }
 
 .right {
@@ -27,23 +30,25 @@ html{
   align-items: center;
 }
 
-.viewBtn ,.editBtn {
+.viewBtn,
+.editBtn {
   background: linear-gradient(135deg, #16a34a, #22c55e);
   border-radius: 8px;
   height: 42px;
   width: 160px;
   font-weight: 600;
   letter-spacing: 0.4px;
-  box-shadow: 0 6px 16px rgba(34,197,94,0.35);
+  box-shadow: 0 6px 16px rgba(34, 197, 94, 0.35);
   transition: all 0.15s ease;
 }
 
-.buttonBox{
+.buttonBox {
   display: flex;
   gap: 10px;
   width: 90%;
   justify-content: center;
 }
+
 .printBtn {
   flex: 1;
   min-width: 80px;
@@ -52,29 +57,47 @@ html{
   border-radius: 8px;
   font-weight: 600;
   letter-spacing: 0.4px;
-  box-shadow: 0 6px 16px rgba(34,197,94,0.35);
+  box-shadow: 0 6px 16px rgba(34, 197, 94, 0.35);
   transition: all 0.15s ease;
 }
 
-.printBtn:hover,.viewBtn:hover ,.editBtn:hover{
+.printBtn:hover,
+.viewBtn:hover,
+.editBtn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(34,197,94,0.45);
+  box-shadow: 0 8px 20px rgba(34, 197, 94, 0.45);
 }
 
-.viewDiv{
+.viewDiv {
   display: flex;
   justify-content: center;
   margin-bottom: 1rem;
 }
 
+
+
 @media print {
+
+  /* Unlock the main container so the browser doesn't take a screenshot */
+  .container {
+    height: auto !important;
+    overflow: visible !important;
+    display: block !important;
+  }
+
   /* 1. Hide the editor UI and buttons */
-  .left, .printBtn, .editBtn, .previewHeading {
+  .left,
+  .printBtn,
+  .editBtn,
+  .buttonBox,
+  .previewHeading {
     display: none !important;
   }
 
+
   /* 2. Reset the page background and margins */
-  html, body {
+  html,
+  body {
     margin: 0 !important;
     padding: 0 !important;
     background: #fff !important;
@@ -89,20 +112,26 @@ html{
   }
 
   /* 4. Remove any digital borders, shadows, or zoom effects */
-  .printWrap, .ResumePage {
+  .printWrap,
+  .ResumePage {
     width: 100% !important;
     max-width: 100% !important;
+    min-height: auto !important;
     margin: 0 !important;
     box-shadow: none !important;
     transform: none !important;
   }
+
   /* 5. Force A4 dimensions */
   @page {
     size: A4 portrait;
-    margin: 0; 
+    margin: 0;
   }
-  #root, .App, body {
-    display: block !important; 
+
+  #root,
+  .App,
+  body {
+    display: block !important;
     align-items: flex-start !important;
     justify-content: flex-start !important;
     margin: 0 !important;
@@ -112,16 +141,19 @@ html{
   /* 2. Stop the first heading/text from pushing the whole page down */
   .ResumePage {
     margin-top: 0 !important;
-    padding-top: 1px !important; /* The 1px padding trick prevents margin collapse */
+    padding-top: 1px !important;
+    /* The 1px padding trick prevents margin collapse */
   }
 
-  .ResumePage > *:first-child {
+  .ResumePage>*:first-child {
     margin-top: 0 !important;
   }
 }
 
 @media screen and (max-width: 1024px) {
-  .left, .right {
+
+  .left,
+  .right {
     width: 100%;
   }
 }
@@ -136,7 +168,8 @@ html{
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #1c1f23; /* Soft gray background */
+  background-color: #1c1f23;
+  /* Soft gray background */
 }
 
 .auth-card {
@@ -173,7 +206,8 @@ html{
 }
 
 .auth-input:focus {
-  border-color: #4CAF50; /* Matches your Save button */
+  border-color: #4CAF50;
+  /* Matches your Save button */
 }
 
 .auth-button {
@@ -214,4 +248,4 @@ html{
   font-size: 15px;
   color: #be0606;
   text-align: center;
-  }
+}

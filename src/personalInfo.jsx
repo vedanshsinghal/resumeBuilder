@@ -1,6 +1,6 @@
 import "./info.css"
 
-function PersonalInfo({visibility,setVisibility,por,setPor,data,setData,link,setLink,edu,setEdu,exp,setExp,skill,setSkill,project,setProject,achievement,setAchievement,other,setOther}){
+function PersonalInfo({visibility,setVisibility,por,setPor,data,setData,link,setLink,edu,setEdu,exp,setExp,skill,setSkill,project,setProject,achievement,setAchievement,other,setOther,ghost,setGhost}){
 
     function handleInfoChange(e){
         const { name, value } = e.target;
@@ -87,12 +87,13 @@ function PersonalInfo({visibility,setVisibility,por,setPor,data,setData,link,set
                     <div key={item.id} className="inputAll">
                         <input type="text" placeholder="Title" name="title" value={item.title} onChange={(e)=>handleListChange(e,item.id,project,setProject)}/>
                         <input type="text" placeholder="Time" name="time" value={item.time} onChange={(e)=>handleListChange(e,item.id,project,setProject)}/>
+                        <input type="text" placeholder="Link (Optional)" name="link" value={item.link} onChange={(e)=>handleListChange(e,item.id,project,setProject)}/>
                         <button className="delete-btn" onClick={() => handleDelete(item.id, project, setProject)}>✖</button>    
                         <div className="inputTextarea">
                             <textarea className="longer_the_input" placeholder="Description" name="description" value={item.description} onChange={(e)=>handleListChange(e,item.id,project,setProject)} rows="5" />
                         </div>
                     </div>))}
-                <button className="addBtn" onClick={() => addMore(project, setProject, { title: "", description:"",time: "" })}>+ Add Project</button>
+                <button className="addBtn" onClick={() => addMore(project, setProject, { title: "", link: "", description:"",time: "" })}>+ Add Project</button>
             </div>
             <div className="section">
                 <div className="sectionHead">
@@ -134,13 +135,31 @@ function PersonalInfo({visibility,setVisibility,por,setPor,data,setData,link,set
             </div>
             <div className="section">
                 <div className="sectionHead">
-                    <h1>Other Skills</h1></div>
+                    <h1>Other Skills</h1>
+                    <input type="checkbox" checked={visibility.other} onChange={() => setVisibility({...visibility,  other: !visibility.other })}></input>
+                </div>
                 {other.map((item)=>(
                     <div key={item.id} className="inputAll">
                         <input className="longer_the_input" type="text" placeholder="Add Skill" name="skill" value={item.skill} onChange={(e)=>handleListChange(e,item.id,other,setOther)}/>
                         <button className="delete-btn" onClick={() => handleDelete(item.id, other, setOther)}>✖</button>                    
                     </div>))}
                 <button className="addBtn" onClick={() => addMore(other, setOther, { skill: "" })}>+ Add Skill</button>
+            </div>
+            <div className="section">
+                <div className="sectionHead">
+                    <h1>Custom Sections</h1>
+                    <input type="checkbox" checked={visibility.ghost} onChange={() => setVisibility({...visibility,  ghost: !visibility.ghost })}></input>
+                </div>
+                {ghost.map((item)=>(
+                    <div key={item.id} className="inputAll">
+                        <input className="longer_the_input" type="text" placeholder="Custom Section Heading" name="heading" value={item.heading} onChange={(e)=>handleListChange(e,item.id,ghost,setGhost)} />
+                        <button className="delete-btn" onClick={() => handleDelete(item.id, ghost, setGhost)}>✖</button>
+                        <div className="inputTextarea">
+                            <textarea className="longer_the_input" placeholder="Add content (each line becomes a bullet point)" name="content" value={item.content} onChange={(e)=>handleListChange(e,item.id,ghost,setGhost)} rows="5" />
+                        </div>
+                    </div>
+                ))}
+                <button className="addBtn" onClick={() => addMore(ghost, setGhost, { heading: "", content: "" })}>+ Add Section</button>
             </div>
         </div>
     )

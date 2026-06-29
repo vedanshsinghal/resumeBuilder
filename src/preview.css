@@ -78,6 +78,18 @@ td{
     justify-content: space-between;
 }
 
+.projectLink {
+    font-size: 13px;
+    font-style: italic;
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+.projectLink a {
+    color: #1a0dab;
+    text-decoration: underline;
+}
+
 .hidden{
     display: none;
 }

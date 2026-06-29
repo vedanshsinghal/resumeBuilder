@@ -1,7 +1,7 @@
 import "./preview.css"
 import nsutLogo from "./assets/image.png"
 
-function Preview({data,link,edu,exp,skill,project,achievement,other,por,visibility}){
+function Preview({data,link,edu,exp,skill,project,achievement,other,por,visibility,ghost}){
     return(
     <>
         <div className="ResumePage">
@@ -64,6 +64,13 @@ function Preview({data,link,edu,exp,skill,project,achievement,other,por,visibili
                             <div>{item.title}</div>
                             <div>{item.time}</div>
                         </div>
+                        {item.link && item.link.trim() !== "" && (
+                            <div className="projectLink">
+                                <a href={item.link.startsWith("http") ? item.link : `https://${item.link}`} target="_blank" rel="noreferrer">
+                                    {item.link.replace(/^https?:\/\/(www\.)?/, '')}
+                                </a>
+                            </div>
+                        )}
                         <ul>
                             {item.description
                             .split('\n') // 1. Split string into array wherever "Enter" was pressed
@@ -115,7 +122,7 @@ function Preview({data,link,edu,exp,skill,project,achievement,other,por,visibili
                     </li>
                 ))}</ul>
             </div>
-            <div className="other">
+            <div className={visibility.other?"other":"other hidden"}>
                 <div className="section-heading">OTHER SKILLS AND EXTRA CURRICULAR ACTIVITIES</div>
                 <ul>{other.map((item)=>(
                     <li key={item.id}>
@@ -123,6 +130,24 @@ function Preview({data,link,edu,exp,skill,project,achievement,other,por,visibili
                     </li>
                 ))}</ul>
             </div>
+            {visibility.ghost && ghost.map((item) => {
+                if (item.heading && item.content && item.content.trim() !== "") {
+                    return (
+                        <div className="ghostSection" key={item.id}>
+                            <div className="section-heading">{item.heading.toUpperCase()}</div>
+                            <ul>
+                                {item.content
+                                    .split('\n')
+                                    .filter(line => line.trim() !== '')
+                                    .map((line, index) => (
+                                        <li key={index}>{line}</li>
+                                    ))}
+                            </ul>
+                        </div>
+                    );
+                }
+                return null;
+            })}
         
         </div>
     </>)

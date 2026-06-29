@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import PersonalInfo from './personalInfo'
 import Preview from './preview'
 import "./style.css"
@@ -9,10 +9,10 @@ import { sampleResume } from './sampleData';
 import axios from "axios"
 
 function ResumeBuilder() {
-  const handlePrint=()=>{
+  const handlePrint = () => {
     window.print()
   }
-  const navigate=useNavigate()
+  const navigate = useNavigate()
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -22,9 +22,9 @@ function ResumeBuilder() {
 
   const handleSave = async () => {
     const token = localStorage.getItem('token');
-    
+
     if (!token) {
-      toast.error("Please log in to save your resume!"); 
+      toast.error("Please log in to save your resume!");
       return;
     }
 
@@ -38,7 +38,8 @@ function ResumeBuilder() {
       skills,
       achievement,
       other,
-      por
+      por,
+      ghost
     };
     const loadingToast = toast.loading('Saving your resume...');
     try {
@@ -58,7 +59,7 @@ function ResumeBuilder() {
       } else {
         const errorData = await response.json();
         toast.dismiss(loadingToast);
-        toast.error(`Failed to save: ${errorData.message}`); 
+        toast.error(`Failed to save: ${errorData.message}`);
       }
     } catch (error) {
       console.error('Error saving resume:', error);
@@ -67,7 +68,7 @@ function ResumeBuilder() {
     }
   };
 
-  const handleLoadSample=()=>{
+  const handleLoadSample = () => {
     setPinfo(sampleResume.pinfo)
     setEducation(sampleResume.education)
     setAchievement(sampleResume.achievement)
@@ -77,50 +78,56 @@ function ResumeBuilder() {
     setOther(sampleResume.other)
     setExperience(sampleResume.experience)
     setPor(sampleResume.por)
+    setGhost(sampleResume.ghost)
   }
-  const [pinfo,setPinfo]=useState({
-    name:"",
-    phone:"",
-    email:"",
+  const [pinfo, setPinfo] = useState({
+    name: "",
+    phone: "",
+    email: "",
   })
-  const [link,setLink]=useState([{
-    id:1,link:"",url:""
+  const [link, setLink] = useState([{
+    id: 1, link: "", url: ""
   }])
-  const [education,setEducation]=useState([{
-    id:1, school:"", degree:"", grade:"" ,time:""
+  const [education, setEducation] = useState([{
+    id: 1, school: "", degree: "", grade: "", time: ""
   }
   ])
-  const [experience,setExperience]=useState([{
-    id:1, time:"", organisation:"" , role:"" , description:""
+  const [experience, setExperience] = useState([{
+    id: 1, time: "", organisation: "", role: "", description: ""
   }])
 
-  const [project, setProject]=useState([{
-    id:1, time:"" ,title:"", description:""
+  const [project, setProject] = useState([{
+    id: 1, time: "", title: "", link: "", description: ""
   }])
 
-  const [skills,setSkills]=useState([{
-    id:1,skill:""
+  const [skills, setSkills] = useState([{
+    id: 1, skill: ""
   }])
-  const [achievement,setAchievement]=useState([{
-    id:1,achievement:""
+  const [achievement, setAchievement] = useState([{
+    id: 1, achievement: ""
   }])
-  const [other,setOther]=useState([{
-    id:1,skill:""
+  const [other, setOther] = useState([{
+    id: 1, skill: ""
   }])
-  const [por,setPor]=useState([{
-    id:1,por:"", description:""
+  const [por, setPor] = useState([{
+    id: 1, por: "", description: ""
   }])
-  const [visibility,setVisibility]=useState({
-    projects:true,
-    experience:true,
-    achievement:true,
-    por:true
+  const [ghost, setGhost] = useState([{
+    id: 1, heading: "", content: ""
+  }])
+  const [visibility, setVisibility] = useState({
+    projects: true,
+    experience: true,
+    achievement: true,
+    por: true,
+    other: true,
+    ghost: true
   })
-  
-  const [activeTab,setactiveTab]=useState("edit")
-  const [windowWidth,setwindowWidth]=useState(window.innerWidth)
-  const [windowHeight,setwindowHeight]=useState(window.innerHeight)
-  const isMobile=windowWidth<=1024
+
+  const [activeTab, setactiveTab] = useState("edit")
+  const [windowWidth, setwindowWidth] = useState(window.innerWidth)
+  const [windowHeight, setwindowHeight] = useState(window.innerHeight)
+  const isMobile = windowWidth <= 1024
 
   useEffect(() => {
     const handleResize = () => {
@@ -135,8 +142,8 @@ function ResumeBuilder() {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-}, []); // The empty array [] means this setup only runs once when the component mounts
-// Add this right below your resize useEffect
+  }, []); // The empty array [] means this setup only runs once when the component mounts
+  // Add this right below your resize useEffect
   useEffect(() => {
     const fetchResume = async () => {
       const token = localStorage.getItem('token');
@@ -154,8 +161,8 @@ function ResumeBuilder() {
           const data = await response.json();
 
           const normalizeData = (array) => {
-             if (!array || !Array.isArray(array)) return [];
-             return array.map(item => ({ ...item, id: item._id || item.id }));
+            if (!array || !Array.isArray(array)) return [];
+            return array.map(item => ({ ...item, id: item._id || item.id }));
           };          // Overwrite the blank React states with your saved MongoDB data!
           if (data.pinfo) setPinfo(data.pinfo);
           if (data.link) setLink(normalizeData(data.link));
@@ -166,6 +173,7 @@ function ResumeBuilder() {
           if (data.achievement) setAchievement(normalizeData(data.achievement));
           if (data.other) setOther(normalizeData(data.other));
           if (data.por) setPor(normalizeData(data.por));
+          if (data.ghost) setGhost(Array.isArray(data.ghost) ? normalizeData(data.ghost) : [{id: 1, ...data.ghost}]);
         }
       } catch (error) {
         console.error('Error fetching resume data:', error);
@@ -175,109 +183,111 @@ function ResumeBuilder() {
     fetchResume();
   }, []); // Empty array ensures this only runs once when the app opens
 
-const availableWidth = isMobile ? windowWidth : (windowWidth * 0.4);
-const widthScale=(availableWidth - 40) / 800
-// 1. Get the workable height (Screen height minus 150px for UI)
-const workableHeight = windowHeight - 110; 
-// 2. Divide by the pixel-equivalent of 297mm (1123px)
-const heightScale = workableHeight / 1123;
+  const availableWidth = isMobile ? windowWidth : (windowWidth * 0.4);
+  const widthScale = (availableWidth - 40) / 800
+  // 1. Get the workable height (Screen height minus 150px for UI)
+  const workableHeight = windowHeight - 110;
+  // 2. Divide by the pixel-equivalent of 297mm (1123px)
+  const heightScale = workableHeight / 1123;
   // 2. Calculate perfect scale based on available space (minus 40px for some breathing room)
-const scaleFactor = Math.min(heightScale,widthScale)
+  const scaleFactor = Math.min(heightScale, widthScale)
 
-const [jobDescription,setjobDescription]=useState("")
-const [analysisResult, setAnalysisResult] = useState(null);
-const [isAnalysing, setIsAnalysing] = useState(false)
-const handleAnalyse = async () => {
-  setIsAnalysing(true);
-  const token = localStorage.getItem('token');
-  try {
-    // send the current state of all your resume sections (pinfo, education, etc.)
-    const resumeData = {education, experience, project, skills, achievement, other, por };
-    
-    const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/analyse`, {
-      resumeData, jobDescription},{headers:{'Authorization': `Bearer ${token}`}
-    });
-    
-    setAnalysisResult(response.data);
-  } catch (err) {
-    console.error("Analysis failed", err);
-  } finally {
-    setIsAnalysing(false);
+  const [jobDescription, setjobDescription] = useState("")
+  const [analysisResult, setAnalysisResult] = useState(null);
+  const [isAnalysing, setIsAnalysing] = useState(false)
+  const handleAnalyse = async () => {
+    setIsAnalysing(true);
+    const token = localStorage.getItem('token');
+    try {
+      // send the current state of all your resume sections (pinfo, education, etc.)
+      const resumeData = { link, education, experience, project, skills, achievement, other, por, ghost };
+
+      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/analyse`, {
+        resumeData, jobDescription
+      }, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+
+      setAnalysisResult(response.data);
+    } catch (err) {
+      console.error("Analysis failed", err);
+    } finally {
+      setIsAnalysing(false);
+    }
   }
-}
-const criteria = [
-                { key: "keyword_match", label: "Keyword Match" },
-                { key: "work_experience", label: "Work Experience" },
-                { key: "measurable_achievements", label: "Achievements" },
-                { key: "education_certifications", label: "Education" },
-            ]
+  const criteria = [
+    { key: "keyword_match", label: "Keyword Match" },
+    { key: "work_experience", label: "Work Experience" },
+    { key: "measurable_achievements", label: "Achievements" },
+    { key: "education_certifications", label: "Education" },
+  ]
 
-  return(
+  return (
     <div className="container">
-      {(activeTab==="edit") &&(
+      {(activeTab === "edit") && (
         <div className="left">
           <div className='viewDiv'>
-          {isMobile && <button className='viewBtn' onClick={() => setactiveTab('preview')}>PREVIEW</button>}
-          <button className='viewBtn' onClick={()=>setactiveTab("analyse")}>ANALYSE</button>
+            {isMobile && <button className='viewBtn' onClick={() => setactiveTab('preview')}>PREVIEW</button>}
+            <button className='viewBtn' onClick={() => setactiveTab("analyse")}>ANALYSE</button>
           </div>
-          <PersonalInfo visibility={visibility} setVisibility={setVisibility} por={por} setPor={setPor} other={other} setOther={setOther} data={pinfo} setData={setPinfo} link={link} setLink={setLink} edu={education} setEdu={setEducation} exp={experience} setExp={setExperience} project={project} setProject={setProject} skill={skills} setSkill={setSkills} achievement={achievement} setAchievement={setAchievement}/>
+          <PersonalInfo visibility={visibility} setVisibility={setVisibility} por={por} setPor={setPor} other={other} setOther={setOther} data={pinfo} setData={setPinfo} link={link} setLink={setLink} edu={education} setEdu={setEducation} exp={experience} setExp={setExperience} project={project} setProject={setProject} skill={skills} setSkill={setSkills} achievement={achievement} setAchievement={setAchievement} ghost={ghost} setGhost={setGhost} />
         </div>)}
 
 
-      {activeTab==="analyse" &&(
+      {activeTab === "analyse" && (
         <div className='left'>
           <div className='viewDiv'>
             {<button className='viewBtn' onClick={() => setactiveTab('edit')}>EDIT</button>}
-            {isMobile&&<button className='viewBtn' onClick={() => setactiveTab('preview')}>PREVIEW</button>}
+            {isMobile && <button className='viewBtn' onClick={() => setactiveTab('preview')}>PREVIEW</button>}
           </div>
           <div className='analyseContainer'>
             <h2>Target Job Description</h2>
-            <textarea className="jdInput" placeholder="Paste the job description here..." value={jobDescription} onChange={(e) => setjobDescription(e.target.value)}/>
+            <textarea className="jdInput" placeholder="Paste the job description here..." value={jobDescription} onChange={(e) => setjobDescription(e.target.value)} />
             <button className="analyseBtn" onClick={handleAnalyse} disabled={isAnalysing}>
               {isAnalysing ? "Scanning..." : "RUN ANALYSIS"}
             </button>
             {analysisResult && (
-            <div className="resultBox" style={{ borderLeftColor: analysisResult.score >= 70 ? '#28a745' : '#dc3545' }}>
-              <div className="scoreSection">
-                <div className='ATS'>
-                <div style={{color: "#f7f7f7", fontWeight:"bold"}}>ATS SCORE</div>
-                <div className="scoreCircle" style={{borderColor: analysisResult.score >= 75 ? '#28a745' : analysisResult.score >= 50 ? '#ffc107' : '#dc3545', color: analysisResult.score >= 75 ? '#28a745' : analysisResult.score >= 50 ? '#856404' : '#dc3545'}}                >
-                  {analysisResult.score}%
-                </div>
-                </div>
-                <div className='rubricScores'>
-                  <div style={{color:"#28A745"}}>{analysisResult.rubric.reasoning}</div>
-                  {criteria.map(({ key, label }) => (
-                    <div key={key}>
-                      <span>{label} : </span>
-                      <span>{analysisResult.rubric_scores[key]}/{analysisResult.rubric.weights[key]}</span>
+              <div className="resultBox" style={{ borderLeftColor: analysisResult.score >= 70 ? '#28a745' : '#dc3545' }}>
+                <div className="scoreSection">
+                  <div className='ATS'>
+                    <div style={{ color: "#f7f7f7", fontWeight: "bold" }}>ATS SCORE</div>
+                    <div className="scoreCircle" style={{ borderColor: analysisResult.score >= 75 ? '#28a745' : analysisResult.score >= 50 ? '#ffc107' : '#dc3545', color: analysisResult.score >= 75 ? '#28a745' : analysisResult.score >= 50 ? '#856404' : '#dc3545' }}                >
+                      {analysisResult.score}%
                     </div>
-                ))}
+                  </div>
+                  <div className='rubricScores'>
+                    <div style={{ color: "#28A745" }}>{analysisResult.rubric.reasoning}</div>
+                    {criteria.map(({ key, label }) => (
+                      <div key={key}>
+                        <span>{label} : </span>
+                        <span>{analysisResult.rubric_scores[key]}/{analysisResult.rubric.weights[key]}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              <div className="feedbackLists">
-                <div className="feedbackCategory">
-                  <h4 style={{ color: '#28a745', margin: '0 0 8px 0' }}>✅ Top Strengths</h4>
-                  <ul>
-                    {analysisResult.strengths.map((item, index) => (
-                    <li key={index}>{item}</li>))}
-                  </ul>
+                <div className="feedbackLists">
+                  <div className="feedbackCategory">
+                    <h4 style={{ color: '#28a745', margin: '0 0 8px 0' }}>✅ Top Strengths</h4>
+                    <ul>
+                      {analysisResult.strengths.map((item, index) => (
+                        <li key={index}>{item}</li>))}
+                    </ul>
+                  </div>
+                  <div className="feedbackCategory">
+                    <h4 style={{ color: '#dc3545', margin: '12px 0 8px 0' }}>⚠️ Areas to Improve</h4>
+                    <ul>
+                      {analysisResult.improvements.map((item, index) => (
+                        <li key={index}>{item}</li>))}
+                    </ul>
+                  </div>
                 </div>
-                <div className="feedbackCategory">
-                  <h4 style={{ color: '#dc3545', margin: '12px 0 8px 0' }}>⚠️ Areas to Improve</h4>
-                  <ul>
-                    {analysisResult.improvements.map((item, index) => (
-                    <li key={index}>{item}</li>))}
-                  </ul>
-                </div>
-              </div>
-              
-            </div>)}
-            </div>
+
+              </div>)}
           </div>
+        </div>
       )}
 
-      {(!isMobile||activeTab==="preview") &&(
+      {(!isMobile || activeTab === "preview") && (
         <div className="right">
           <h1 className='previewHeading'>Resume Preview</h1>
           {/* New Button Row! */}
@@ -289,10 +299,10 @@ const criteria = [
           </div>
           <div>
             {isMobile && <button className='editBtn' onClick={() => setactiveTab('edit')}>EDIT</button>}
-            {isMobile && <button className='editBtn' onClick={() => setactiveTab('analyse')}>ANALYSE</button>}          
+            {isMobile && <button className='editBtn' onClick={() => setactiveTab('analyse')}>ANALYSE</button>}
           </div>
           <div className="printWrap" style={{ transform: `scale(${scaleFactor})`, transformOrigin: 'top center' }}>
-          <Preview visibility={visibility} por={por} other={other} data={pinfo} link={link} edu={education} exp={experience} project={project} skill={skills} achievement={achievement}/>
+            <Preview visibility={visibility} por={por} other={other} data={pinfo} link={link} edu={education} exp={experience} project={project} skill={skills} achievement={achievement} ghost={ghost} />
           </div>
         </div>)}
     </div>

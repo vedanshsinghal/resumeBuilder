@@ -22,6 +22,7 @@ function App() {
   return (
     <BrowserRouter> {/* allows all routes to read the url, jab url=route tab wo route trigger hojayega */}
     {/* 2. Add the Toaster here. It will show up on top of everything else */}
+    <Analytics/>
       <Toaster position="bottom-right" reverseOrder={false} />
       <Routes>
         {/* 2. Wrap your ResumeBuilder in the bouncer */}
